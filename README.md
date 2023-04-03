@@ -27,4 +27,4 @@ Thanks to GPT4, I managed to create this addon that display warning text on your
 - Blender 2.8 or above (functional up to 3.5 as of the addon creation)
 
 ## Demonstration
-Uploading blender_eiKKigzBhP.mp4…
+https://user-images.githubusercontent.com/44787492/229416732-707545c5-9084-4c29-a009-30069489a30f.mp4
