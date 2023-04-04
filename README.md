@@ -15,6 +15,7 @@ Thanks to GPT4, I managed to create this addon that display warning text on your
 2. Open Blender, go to `Edit > Preferences > Add-ons > Install`
 3. Select the downloaded ZIP file and click `Install Add-on`
 4. Enable the add-on by checking the checkbox next to `Shapekey Warning`
+4.5. (If the addon does not show up in the list, you might need to install the file inside the zip folder directly in the addons folder located in your blender install : C:\Program Files\Blender Foundation\Blender X.X\X.X\scripts\addons)
 5. Press the N key in the Viewport to select the Shapekey Warning side-panel and configure it as you wish!
 
 ## Usage
