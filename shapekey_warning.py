@@ -1,6 +1,6 @@
 bl_info = {
     "name": "Shapekey Warning",
-    "author": "Your Name",
+    "author": "Ruuubick",
     "version": (1, 0),
     "blender": (2, 80, 0),
     "location": "3D View > Sidebar > Shapekey Warning",
