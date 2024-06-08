@@ -2,7 +2,7 @@ bl_info = {
     "name": "Shapekey Warning",
     "author": "Ruuubick",
     "version": (1, 0),
-    "blender": (2, 80, 0),
+    "blender": (3, 0, 0),
     "location": "3D View > Sidebar > Shapekey Warning",
     "description": "Displays a warning when editing non-Basis shapekeys",
     "category": "3D View",
@@ -10,7 +10,9 @@ bl_info = {
 
 import bpy
 import blf
-import bgl
+import gpu
+from gpu_extras.batch import batch_for_shader
+
 from bpy.types import Panel
 from bpy.app.handlers import persistent
 
@@ -26,12 +28,24 @@ def draw_shapekey_warning(scene):
             if shapekey and shapekey.name != 'Basis':
                 prefs = context.preferences.addons[addon_key].preferences
                 font_id = 0
-                blf.size(font_id, prefs.font_size, 72)
-                bgl.glEnable(bgl.GL_BLEND)
-                blf.color(font_id, prefs.text_color[0], prefs.text_color[1], prefs.text_color[2], prefs.text_color[3])
+                blf.size(font_id, prefs.font_size)
+
+                # Ensure the shader is available and correctly used
+                try:
+                    shader = gpu.shader.from_builtin('UNIFORM_COLOR')
+                    batch = batch_for_shader(shader, 'TRIS', {"pos": [(0, 0), (1, 0), (1, 1)]})
+                    shader.bind()
+                    shader.uniform_float("color", (prefs.text_color[0], prefs.text_color[1], prefs.text_color[2], prefs.text_color[3]))
+                    batch.draw(shader)
+                except Exception as e:
+                    print(f"Error in using GPU module: {e}")
+
                 blf.position(font_id, prefs.location_x, prefs.location_y, 0)
+                
+                # Set the text color correctly using blf.color
+                blf.color(font_id, prefs.text_color[0], prefs.text_color[1], prefs.text_color[2], prefs.text_color[3])
+                
                 blf.draw(font_id, prefs.warning_text)
-                bgl.glDisable(bgl.GL_BLEND)
 
 def draw_callback_px():
     draw_shapekey_warning(bpy.context.scene)
@@ -118,5 +132,5 @@ def unregister():
     bpy.utils.unregister_class(ShapeKeyWarningPreferences)
 
 
-if addon_key == "__main__":
+if __name__ == "__main__":
     register()
