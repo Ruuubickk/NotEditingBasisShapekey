@@ -24,7 +24,7 @@ Thanks to GPT4, I managed to create this addon that display warning text on your
 
 ## Requirements
 
-- Blender 2.8 or above (functional up to 3.6!)
+- Blender 2.8 or above (functional up to 4.0!)
 
 ## Demonstration
 https://user-images.githubusercontent.com/44787492/229416732-707545c5-9084-4c29-a009-30069489a30f.mp4
